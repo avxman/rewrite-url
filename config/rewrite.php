@@ -2,7 +2,7 @@
 
 return [
 
-    'provider' => \Avxman\Rewrite\URL\UrlServiceProvider::class,
+    'provider' => \Avxman\Rewrite\Providers\UrlServiceProvider::class,
     'routes' => [
 
         'rewrite_api',
