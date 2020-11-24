@@ -13,13 +13,13 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Avxman\\Rewrite\\URL\\": "src/"
+            "Avxman\\Rewrite\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Avxman\\Rewrite\\URL\\RewriteUrlServiceProvider"
+                "Avxman\\Rewrite\\RewriteUrlServiceProvider"
             ]
         }
     },
