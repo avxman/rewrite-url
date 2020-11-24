@@ -1,0 +1,29 @@
+{
+    "name": "avxman/rewrite-url",
+    "description": "The module links overwrite",
+    "version": "0.0.1",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandr Kheyder",
+            "email": "downloadsite.x@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Avxman\\Rewrite\\URL\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Avxman\\Rewrite\\URL\\RewriteUrlServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    }
+}

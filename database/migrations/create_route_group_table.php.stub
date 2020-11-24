@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateRouteGroupTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('route_group', function (Blueprint $table) {
+            $table->bigIncrements('id')->comment('Уникальный идентификатор');
+            $table->bigInteger('parent_id')->nullable()->comment('ID родилетя группы для работы с Baum (вложеность)');
+            $table->integer('lft')->nullable()->comment('Позиция справа для Baum');
+            $table->integer('rgt')->nullable()->comment('Позиция слева для Baum');
+            $table->integer('depth')->nullable()->comment('Очередность для Baum');
+            $table->string('group', 60)->unique()->index()->comment('Имя группы');
+            $table->string('prefix', 125)->nullable()->comment('Префикс адреса user.* - user/edit, user/create и т.д.');
+            $table->string('middleware', 125)->nullable()->comment('Защита роута должна быть указана в таком формате ["web", "auth"]');
+            $table->timestamp('created_at')->useCurrent()->comment('Дата создания');
+            $table->timestamp('updated_at')->nullable()->comment('Дата обновления');
+        });
+        Illuminate\Support\Facades\DB::statement("ALTER TABLE `".env('DB_PREFIX')."route_group` comment 'Таблица группы роутов - адресов группы ссылок'");
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('route_group');
+    }
+}
