@@ -1,6 +1,6 @@
 <?php
 
-namespace Avxman\Rewrite\URL;
+namespace Avxman\Rewrite;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
