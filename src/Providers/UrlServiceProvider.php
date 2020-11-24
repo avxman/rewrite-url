@@ -1,6 +1,6 @@
 <?php
 
-namespace Avxman\Rewrite\URL\Providers;
+namespace Avxman\Rewrite\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
