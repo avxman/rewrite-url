@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Avxman\\Rewrite\\RewriteUrlServiceProvider"
+                "Avxman\\Rewrite\\RewriteServiceProvider"
             ]
         }
     },
