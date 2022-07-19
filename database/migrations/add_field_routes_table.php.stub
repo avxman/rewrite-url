@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddFieldRoutesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('routes', function (Blueprint $table) {
+            $table->json('pattern_url')->nullable()->comment('Паттерн ссылки. G - таблица группы роутов; R - таблица роутов')->after('position');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('routes', function (Blueprint $table) {
+            $table->dropColumn('pattern_url');
+        });
+    }
+}

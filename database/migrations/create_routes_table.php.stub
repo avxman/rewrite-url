@@ -1,0 +1,51 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateRoutesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('routes', function (Blueprint $table) {
+            $table->bigIncrements('id')->comment('Уникальный идентификатор');
+            $table->bigInteger('model_id')->nullable()->comment('Уникальный идентификатор товара, категории, страницы в модельки');
+            $table->boolean('resource')->default(false)->comment('Использовать ресурсный роутер');
+            $table->boolean('fallback')->default(false)->comment('Использовать роутер для всех страниц у которых нет настроенных роутов');
+            $table->boolean('enable')->default(true)->comment('Вкл./Откл. роутер');
+            $table->bigInteger('position')->default(0)->comment('Важность роутера. Чем меньше позиция тем быстрее попадет в проверку первоочередности');
+            $table->string('controller')->nullable()->comment('Контроллер для роута');
+            $table->string('route', 10)->nullable()->comment('Метод запроса: get, post и т.д.');
+            $table->string('name', 30)->unique()->index()->comment('Имя роута - route("name")');
+            $table->string('uri')->unique()->index()->comment('Адрес роута (ссылка страницы)');
+            $table->string('method', 60)->nullable()->comment('Имя функции из контроллера');
+            $table->bigInteger('group_id')->unsigned()->index()->comment('К какой группе добавлен роут ->group("user")');
+            $table->string('middleware', 125)->nullable()->comment('Защита роута только для текущего роута, должна быть указана в таком формате ["web", "auth"]');
+            $table->string('only', 125)->nullable()->comment('Если ресурсный тогда какие методы оставить вкл. в таком формате ["index"]');
+            $table->string('except', 125)->nullable()->comment('Если ресурсный тогда какие методы нужно исключить в таком формате ["store"]');
+            $table->string('redirect')->nullable()->comment('Если не пустое тогда роут будет перенаправлен на указанный роут или адрес');
+            $table->string('model_class')->nullable()->comment('Указываем класс модельки для поля modal_id');
+            $table->timestamp('created_at')->useCurrent()->comment('Дата создания');
+            $table->timestamp('updated_at')->nullable()->comment('Дата обновления');
+            $table->foreign('group_id')->references('id')->on('route_groups')->onDelete('cascade')->onUpdate('cascade');
+            //создаем связь между таблицей route_group по ключам: group_id, id
+        });
+        Illuminate\Support\Facades\DB::statement("ALTER TABLE `".env('DB_PREFIX')."routes` comment 'Таблица роутов - адресов ссылок'");
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('routes');
+    }
+}

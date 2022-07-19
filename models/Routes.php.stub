@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Avxman\Rewrite\Models\Routes as Model;
+
+class Routes extends Model
+{
+
+}
